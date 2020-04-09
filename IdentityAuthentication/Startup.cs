@@ -3,19 +3,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Basics
+namespace IdentityAuthentication
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddAuthentication("CookieAuth")
-                .AddCookie("CookieAuth", config =>
-                {
-                    config.Cookie.Name = "MyCompanyName.Cookie";
-                    config.LoginPath = "/Home/Authenticate";
-                });
+            //services
+            //    .AddAuthentication()
+            //    .AddCookie("CookieAuth", config =>
+            //    {
+            //        config.Cookie.Name = "";
+            //    });
             services.AddControllersWithViews();
         }
 
@@ -27,11 +26,7 @@ namespace Basics
             }
 
             app.UseRouting();
-
-            // Who are you?
             app.UseAuthentication();
-
-            // Are you allowed?
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
