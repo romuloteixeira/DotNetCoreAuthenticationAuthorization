@@ -14,6 +14,13 @@ namespace Basics
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", config =>
+                {
+                    config.Cookie.Name = "MyCompanyName.Cookie";
+                    config.LoginPath = "/Home/Authenticate";
+                });
             services.AddControllersWithViews();
         }
 
@@ -25,6 +32,11 @@ namespace Basics
             }
 
             app.UseRouting();
+
+            // Who are you?
+            app.UseAuthentication();
+
+            // Are you allowed?
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
